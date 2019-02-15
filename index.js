@@ -25,6 +25,37 @@ function validate(arr, item, n) {
 	return result;
 }
 
+/**
+ * Returns the number of times the input item is found in the array.
+ * If input n is an integer, stops counting after a max of n items are found.
+ * @param {Array} an array to be tested
+ * @param {Object} search in the array to find this item
+ * @param {Integer} an integer, greater than 0, not required.
+ * @return {Boolean} returns the number of times that item is found in the
+ * input arr, up to n, if n is set
+ */
+function count(arr, item, n) {
+	var tot = 0;
+	if (typeof n === "number" && n > 0) {
+		arr.some(function(el) {
+			if (el === item) {
+				tot++;
+			}
+			if (tot >= n) {
+				return true;
+			}
+		});
+	} else {
+		arr.forEach(function(el) {
+			if (el === item) {
+				tot++;
+			}
+		});
+	}
+	return tot;
+}
+
 if (typeof module !== 'undefined' && module.exports != null) {
     exports.validate = validate;
+    exports.count = count;
 }
